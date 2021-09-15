@@ -1,0 +1,15 @@
+out/
+target/
+.idea*
+.bsp*
+*.iml
+.bloop/
+.metals/
+.vscode/
+*~
+nohup.out
+
+
+#metals
+project/project
+project/metals.sbt
