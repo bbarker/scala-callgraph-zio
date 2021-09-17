@@ -2,4 +2,11 @@ package callgraph
 
 trait CallGraphEvaluator
 
-trait CallGraph // TODO - This should be a graph-like data structure
+enum Graph:
+  case Node(name: String, typeName: String)
+  case Edge(source: Node, target: Node, edgeType: String)
+
+import Graph.*
+
+trait CallGraph(metaData: String /* TODO Not just String*/ /*,  root: Node */ )
+// TODO - This should hold a graph-like data structure: Graph
