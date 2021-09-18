@@ -38,13 +38,18 @@ val scalajsdom = "1.1.0"
 
 publish / skip := true
 
+lazy val zioV = "2.0.0-M2"
 lazy val `callgraphJS`  = `callgraph`.js
 lazy val `callgraphJVM` = `callgraph`.jvm
 lazy val `callgraph` = crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Full)
   .jvmSettings(publish / skip := true)
   .jsSettings(testSettings)
-  .settings(libraryDependencies += "dev.zio" %%% "zio" % "2.0.0-M2")
+  .settings(libraryDependencies ++= List(
+    "dev.zio"                    %%% "zio" % zioV,
+    "dev.zio"                    %%% "zio-test"            % zioV % Test,
+    "dev.zio"                    %%% "zio-test-sbt"        % zioV % Test,
+    ))
 
 lazy val `examples` = project
   .enablePlugins(ScalaJSPlugin)
@@ -56,6 +61,6 @@ lazy val `examples` = project
   )
 
 lazy val testSettings = Seq(
-  // Test / testOptions   += Tests.Argument(TestFrameworks.ScalaTest, "-oDF"),
-  Test / jsEnv := new org.scalajs.jsenv.jsdomnodejs.JSDOMNodeJSEnv(),
+  // Test / jsEnv := new org.scalajs.jsenv.jsdomnodejs.JSDOMNodeJSEnv(), // Note: enable jsdom dep build.properties for this
+  testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework")
 )

@@ -8,5 +8,5 @@ enum Graph:
 
 import Graph.*
 
-trait CallGraph(metaData: String /* TODO Not just String*/ /*,  root: Node */ )
+trait CallGraph(val metaData: String /* TODO Not just String*/ /*,  root: Node */ )
 // TODO - This should hold a graph-like data structure: Graph
